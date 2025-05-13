@@ -1,10 +1,11 @@
 function renderIncomeBarViz () {
-    const wSvg = 990;
-    const hSvg = 690;
+    const wSvg = 950;
+    const hSvg = 670;
     const wViz = wSvg * 0.8;
     const hViz = hSvg * 0.7;
     const wPadding = (wSvg - wViz) / 2;
-    const hPadding = (hSvg - hViz) / 2;
+    const hPaddingTop = 40;
+    const hPaddingBottom = 100;
 
     let incomeData = [];
 
@@ -26,6 +27,14 @@ function renderIncomeBarViz () {
         incomeData.push(chart);
     }
     
+    
+    let sortedIncomeData = incomeData.sort((a,b) => b.djIncome - a.djIncome);
+    let managerNames = sortedIncomeData.map(x => x.name);
+    console.log(sortedIncomeData);
+    
+    let colorArray = ["#FE00B0", "#BB00FF", "#FF2D1F", "#055C00", "#0333ED", "#00FFFF", "#FFFB00", "#480892", "#2FFF00", "#FF7317"];
+    
+    let customMinIncome = 4800000; // fråga Erik, ändra spannet?
     let maxIncome = incomeData[0].djIncome;
     let minIncome = incomeData[0].djIncome;
     for (let income of incomeData) {
@@ -33,9 +42,72 @@ function renderIncomeBarViz () {
         minIncome = Math.min(minIncome, income.djIncome);
     }
 
-    console.log(maxIncome);
-    console.log(minIncome);
+    let incomeScale = d3.scaleLinear([customMinIncome, maxIncome], [hPaddingTop + hViz, hPaddingTop]);
+    let heightScale = d3.scaleLinear([customMinIncome, maxIncome], [0, hViz]);
+    let managerScale = d3.scaleBand(managerNames, [wPadding, wPadding + wViz]).paddingInner(0.4).paddingOuter(0.4);
     
+    let svg = d3.select("body")
+        .append("svg")
+        .attr("width", wSvg)
+        .attr("height", hSvg)
+        .style("background-color", "black");
+
+    let groupViz = svg.append("g")
+        .selectAll("rect")
+        .data(sortedIncomeData)
+        .enter()
+        .append("rect")
+        .attr("width", managerScale.bandwidth)
+        .attr("height", (d, i, nodes) => heightScale(d.djIncome))
+        .attr("x", (d, i, nodes) => managerScale(d.name))
+        .attr("y", (d, i, nodes) => incomeScale(d.djIncome))
+        .attr("fill", (d, i, nodes) => colorArray[i]);
+    
+
+    let xAxis = d3.axisBottom(managerScale);
+    svg.append("g")
+        .attr("transform", `translate(0, ${hViz + hPaddingTop})`)
+        .call(xAxis)
+        .selectAll("text")
+        .attr("class", "incomeVizText")
+        .attr("fill", "white")
+        .attr("transform", "rotate(-40)") 
+        .style("text-anchor", "end")      
+        .attr("x", -10)                   
+        .attr("y", 10); 
+        ; 
+        
+    let yAxis = d3.axisLeft(incomeScale);
+    svg.append("g")
+        .attr("transform", `translate(${wPadding}, 0)`)
+        .call(yAxis)
+        .selectAll("text")
+        .attr("class", "incomeVizText")
+        .attr("fill", "white"); 
+
+    svg.selectAll(".domain, .tick line")
+        .attr("stroke", "white");
+
+    svg.append("text")
+        .attr("class", "incomeP")
+        .attr("x", wPadding - 30)             
+        .attr("y", hPaddingTop - 20)             
+        .attr("fill", "white")
+        .text("Income");
+
+    svg.append("text")
+        .attr("class", "incomeP")
+        .attr("x", wPadding + wViz / 2)       // centrera under diagrammet
+        .attr("y", hPaddingTop + hViz + 120)      // under x-axeln
+        .attr("text-anchor", "middle")        // centrera texten horisontellt
+        .attr("fill", "white")
+        .text("Managers");
+
+    
+
+    
+
+}
     
 
     
@@ -45,4 +117,3 @@ function renderIncomeBarViz () {
 
 
 
-}
