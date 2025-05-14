@@ -4,7 +4,7 @@ function renderIncomeBarViz () {
     const wViz = wSvg * 0.8;
     const hViz = hSvg * 0.7;
     const wPadding = (wSvg - wViz) / 2;
-    const hPaddingTop = 40;
+    const hPaddingTop = 50;
     const hPaddingBottom = 100;
 
     let incomeData = [];
@@ -97,16 +97,11 @@ function renderIncomeBarViz () {
 
     svg.append("text")
         .attr("class", "incomeP")
-        .attr("x", wPadding + wViz / 2)       // centrera under diagrammet
-        .attr("y", hPaddingTop + hViz + 120)      // under x-axeln
-        .attr("text-anchor", "middle")        // centrera texten horisontellt
+        .attr("x", wPadding + wViz / 2)
+        .attr("y", hPaddingTop + hViz + 120)     
+        .attr("text-anchor", "middle")        
         .attr("fill", "white")
-        .text("Managers");
-
-    
-
-    
-
+        .text("Managers");    
 }
     
 
