@@ -1,0 +1,121 @@
+#backgroundContainer {
+    background-color: #480892de;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#contentContainer {
+    width: 90%;
+    height: 100%;
+    background-color: black;
+    border-radius: 5px;
+}
+
+#infoBox {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 50px;
+}
+
+#descriptionP {
+    color: white;
+    width: 600px;
+    text-align: center;
+    font-family: IbmPlexMono;
+}
+
+h2 {
+    color: #F5F5F5;
+    text-align: center;
+    text-shadow: 0px 0px 50px rgba(0, 0, 0, 0.25), 0px 0px 25px #FF00E6;
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: #FF00E6;
+    font-family: Orbitron;
+    font-size: 50px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: 3.5px;
+    position: absolute;
+    top: 145px;
+}
+
+#titleText {
+    margin: 0;
+    text-align: center;
+    -webkit-text-stroke-width: 1.5px;
+    -webkit-text-stroke-color: #2FFF00;
+    font-family: "LeagueGothic-Regular";
+    font-size: 80px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: 5px;
+    color: rgba(255, 255, 255, 0);
+    padding: 10px;
+}
+
+#ravePic {
+    width: 750px;
+    height: 450px;
+    margin-top: 100px;
+}
+
+#dividerBox {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 70px;
+    background-color: #480892;
+    color: #2FFF00;
+    font-family: IbmPlexMono;
+    margin-top: 50px;
+}
+
+#visualizationContainer {
+    width: 100%;
+    padding: 40px;
+}
+
+.category {
+    color: #F5F5F5;
+    text-shadow: 0px 0px 50px rgba(0, 0, 0, 0.25), 0px 0px 25px #FF00E6;
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: #FF00E6;
+    font-family: Orbitron;
+    font-size: 35px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: 3.5px;
+}
+
+h3:nth-of-type(2), h3:nth-of-type(3) {
+    margin-top: 70px;
+}
+
+.description {
+    color: white;
+    width: 870px;
+    font-size: 14px;
+    font-family: IbmPlexMono;
+}
+
+#firstViz, #secondViz, #thirdViz {
+    width: 950px;
+    height: 670px;
+    background-color: white;
+    margin-top: 50px;
+}
+
+#footer {
+    height: 150px;
+    background-color: #480892;
+    margin-top: 70px;
+}
+
