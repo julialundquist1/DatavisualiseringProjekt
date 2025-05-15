@@ -17,12 +17,10 @@ function renderIncomeBarViz () {
 
         let managerGigs = Gigs.filter(gig => djArray.some(dj => dj.id === gig.djID));
 
-    // 5. Hitta första och sista datumet de har haft ett gig
         let gigDates = managerGigs.map(gig => new Date(gig.date));
         let earliest = new Date(Math.min(...gigDates));
         let latest = new Date(Math.max(...gigDates));
 
-    // 6. Räkna ut hur många år mellan första och sista gig (alltid minst 1)
         let yearsActive = latest.getFullYear() - earliest.getFullYear() + 1;
         let djIncome = 0;
         for (let dj of djArray) {
@@ -112,6 +110,8 @@ function renderIncomeBarViz () {
         .attr("fill", "white")
         .text("Managers");    
 }
+
+
     
 
     
