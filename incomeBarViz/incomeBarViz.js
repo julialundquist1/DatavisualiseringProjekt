@@ -5,7 +5,6 @@ function renderIncomeBarViz () {
     const hViz = hSvg * 0.7;
     const wPadding = (wSvg - wViz) / 2;
     const hPaddingTop = 50;
-    const hPaddingBottom = 100;
 
     let incomeData = [];
 
@@ -37,6 +36,8 @@ function renderIncomeBarViz () {
     
     
     let sortedIncomeData = incomeData.sort((a,b) => b.djIncome - a.djIncome);
+    console.log(sortedIncomeData);
+    
     let managerNames = sortedIncomeData.map(x => x.name);
     console.log(sortedIncomeData);
     
