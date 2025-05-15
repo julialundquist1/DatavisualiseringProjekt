@@ -14,6 +14,16 @@ function renderIncomeBarViz () {
         let id = manager.id;
         let djArray = DJs.filter(x => id == x.managerID);
         let numberOfDjs = djArray.length;
+
+        let managerGigs = Gigs.filter(gig => djArray.some(dj => dj.id === gig.djID));
+
+    // 5. Hitta första och sista datumet de har haft ett gig
+        let gigDates = managerGigs.map(gig => new Date(gig.date));
+        let earliest = new Date(Math.min(...gigDates));
+        let latest = new Date(Math.max(...gigDates));
+
+    // 6. Räkna ut hur många år mellan första och sista gig (alltid minst 1)
+        let yearsActive = latest.getFullYear() - earliest.getFullYear() + 1;
         let djIncome = 0;
         for (let dj of djArray) {
             for (let gig of Gigs) {
@@ -22,7 +32,7 @@ function renderIncomeBarViz () {
                 }
             }
         }
-        let averageIncome = djIncome / numberOfDjs;
+        let averageIncome = djIncome / (numberOfDjs * yearsActive);
         let chart = {name: name, id: id, djIncome: averageIncome, numOfDjs: numberOfDjs};
         incomeData.push(chart);
     }
@@ -33,8 +43,7 @@ function renderIncomeBarViz () {
     console.log(sortedIncomeData);
     
     let colorArray = ["#FE00B0", "#BB00FF", "#FF2D1F", "#055C00", "#0333ED", "#00FFFF", "#FFFB00", "#480892", "#2FFF00", "#FF7317"];
-    
-    let customMinIncome = 4800000; // fråga Erik, ändra spannet?
+
     let maxIncome = incomeData[0].djIncome;
     let minIncome = incomeData[0].djIncome;
     for (let income of incomeData) {
@@ -42,8 +51,8 @@ function renderIncomeBarViz () {
         minIncome = Math.min(minIncome, income.djIncome);
     }
 
-    let incomeScale = d3.scaleLinear([customMinIncome, maxIncome], [hPaddingTop + hViz, hPaddingTop]);
-    let heightScale = d3.scaleLinear([customMinIncome, maxIncome], [0, hViz]);
+    let incomeScale = d3.scaleLinear([0, maxIncome], [hPaddingTop + hViz, hPaddingTop]);
+    let heightScale = d3.scaleLinear([0, maxIncome], [0, hViz]);
     let managerScale = d3.scaleBand(managerNames, [wPadding, wPadding + wViz]).paddingInner(0.4).paddingOuter(0.4);
     
     let svg = d3.select("body")
