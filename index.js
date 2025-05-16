@@ -1,1 +1,1 @@
-renderIncomeLineViz();
+renderActivityViz();

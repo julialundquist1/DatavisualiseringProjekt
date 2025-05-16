@@ -1,0 +1,15 @@
+.activityText {
+    font-size: 12px;
+    font-family: sans-serif;
+}
+
+.activityP {
+    font-family: sans-serif;
+    font-size: 16px;
+    color: white;
+}
+
+.tooltip {
+    font-family: sans-serif;
+    border: 1px solid grey;
+}

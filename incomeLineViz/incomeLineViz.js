@@ -13,7 +13,7 @@ function renderIncomeLineViz() {
         let id = manager.id;
         let djArray = DJs.filter(x => id == x.managerID);
         let numberOfDjs = djArray.length;
-        let managerGigs = Gigs.filter(gig => djArray.some(dj => dj.id === gig.djID));
+        let managerGigs = Gigs.filter(gig => djArray.map(dj => dj.id).includes(gig.djID));
 
         let incomeObject = {
             name: name,
@@ -110,7 +110,7 @@ function renderIncomeLineViz() {
                   .style("left", (event.pageX + 10) + "px")
                   .style("top", (event.pageY - 20) + "px")
                   .style("opacity", 1)
-                  .html(`Manager: ${data.name}<br>Year: ${d.year}<br>Income: ${Math.round(d.income)} kr`);
+                  .html(`${data.name}<br>Year: ${d.year}<br>Income: ${Math.round(d.income)} kr`);
               })
             .on("mouseout", () => {
                 tooltip.style("opacity", 0);
