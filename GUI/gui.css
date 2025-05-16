@@ -106,11 +106,19 @@ h3:nth-of-type(2), h3:nth-of-type(3) {
     font-family: IbmPlexMono;
 }
 
-#firstViz, #secondViz, #thirdViz {
+#firstViz, #secondViz, #fourthViz {
     width: 950px;
     height: 670px;
     background-color: white;
     margin-top: 50px;
+}
+
+#thirdViz {
+    width: 950px;
+    height: 700px;
+    background-color: white;
+
+
 }
 
 #footer {
@@ -119,3 +127,56 @@ h3:nth-of-type(2), h3:nth-of-type(3) {
     margin-top: 70px;
 }
 
+#belowText  {
+    margin-top: 50px;
+}
+
+#legendBox {
+    display: flex;
+    background-color: black;
+    height: 80px;
+    width: 950px;
+    margin-top: 50px;
+    gap: 20px;
+    justify-content: end;
+}
+
+#legendOne, #legendTwo, #legendThree, #legendFour {
+    display: flex;
+    flex-direction: column;
+    width: 50px;
+    align-items: center;
+    text-align: center;
+}
+
+#legendColorOne {
+    background-color: #C3FFB5;
+    width: 24px;
+    height: 24px;
+}
+
+#legendColorTwo {
+    background-color: #7EFE7B;
+    width: 24px;
+    height: 24px;
+}
+
+#legendColorThree {
+    background-color: #15FF00;
+    width: 24px;
+    height: 24px;
+}
+
+#legendColorFour {
+    background-color: #07C900;
+    width: 24px;
+    height: 24px;
+}
+
+.legendP {
+    margin-top: 0;
+    margin-bottom: 5px;
+    font-family: Inter;
+    color: white;
+    font-size: 10px;
+}
