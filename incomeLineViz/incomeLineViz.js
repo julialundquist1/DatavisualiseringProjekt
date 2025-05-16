@@ -1,8 +1,8 @@
 function renderIncomeLineViz () {
     const wSvg = 950;
-    const hSvg = 670;
+    const hSvg = 600;
     const wViz = wSvg * 0.8;
-    const hViz = hSvg * 0.7;
+    const hViz = hSvg * 0.8;
     const wPadding = (wSvg - wViz) / 2;
     const hPaddingTop = 50;
 
@@ -39,13 +39,7 @@ function renderIncomeLineViz () {
         incomeData.push(incomeObject);
     }
 
-    let colorArray = ["#FE00B0", "#BB00FF", "#FF2D1F", "#055C00", "#0333ED", "#00FFFF", "#FFFB00", "#480892", "#2FFF00", "#FF7317"];
-    let sortedManagers = incomeData.sort((a, b) => a.name.localeCompare(b.name));
-    let sortedNames = sortedManagers.map(d => d.name);
-    let colorScale = d3.scaleOrdinal()
-        .domain(sortedNames)
-        .range(colorArray);
-
+    let colorArray = ["#00FFFF", "#FF7317", "#FF2D1F", "#BB00FF", "#480892", "#FFFB00", "#055C00", "#0333ED", "#2FFF00", "#FE00B0"];
     let allYears = incomeData[0].years.map(y => y.year);
     
     let maxIncome = incomeData[0].years[0].income;
@@ -94,23 +88,63 @@ function renderIncomeLineViz () {
         .data(incomeData)
         .enter()
         .append("path")
-        .attr("stroke", d => colorScale(d.name))
+        .attr("id", d => `line_${d.id}`)
+        .attr("class", "incomeLine")
+        .attr("stroke", (d, i, nodes) => colorArray[i])
         .attr("fill", "transparent")
         .attr("d", d => dMaker(d.years));
 
-    incomeData.forEach((data) => {
+    incomeData.forEach((data, index) => {
         svg.append("g")
             .selectAll("rect")
             .data(data.years)
             .enter()
             .append("circle")
-            .attr("fill", "white")
+            .attr("id", d => `circle_${data.id}`)
+            .attr("fill", colorArray[index])
             .attr("cx", d => yearScale(d.year))
             .attr("cy", d => incomeScale(d.income))
             .attr("r", 5)
         ;
     });
+
+    svg.append("text")
+    .attr("class", "incomeP")
+    .attr("x", wPadding - 30)             
+    .attr("y", hPaddingTop - 20)             
+    .attr("fill", "white")
+    .text("Income");
+
+svg.append("text")
+    .attr("class", "incomeP")
+    .attr("x", wPadding + wViz / 2)
+    .attr("y", hPaddingTop + hViz + 60)     
+    .attr("text-anchor", "middle")        
+    .attr("fill", "white")
+    .text("Years");
     
+    d3.select("body").append("div")
+    .selectAll("div")
+    .data(incomeData)
+    .enter()
+    .append("button")
+    .text(d => d.name)
+    .on("click", (event,d) => {
+        d3.selectAll(".incomeLine").attr("visibility", "hidden");
+        d3.selectAll("circle").attr("visibility", "hidden");
     
+        // Hantera knappens 'active' klass
+        let activeButton = document.querySelector("button.active");
+        if (activeButton) activeButton.classList.remove("active");
+        event.target.classList.add("active");
+    
+        // Visa vald linje och cirklar
+        d3.select(`#line_${d.id}`).attr("visibility", "visible");
+        d3.selectAll(`#circle_${d.id}`).attr("visibility", "visible");
+      })
 
 }
+
+
+    
+
