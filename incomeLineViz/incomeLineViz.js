@@ -105,8 +105,27 @@ function renderIncomeLineViz() {
             .attr("cx", d => yearScale(d.year))
             .attr("cy", d => incomeScale(d.income))
             .attr("r", 5)
+            .on("mouseover", (event, d) => {
+                tooltip
+                  .style("left", (event.pageX + 10) + "px")
+                  .style("top", (event.pageY - 20) + "px")
+                  .style("opacity", 1)
+                  .html(`Manager: ${data.name}<br>Year: ${d.year}<br>Income: ${Math.round(d.income)} kr`);
+              })
+            .on("mouseout", () => {
+                tooltip.style("opacity", 0);
+              })
             ;
     });
+
+    let tooltip = d3.select("body")
+        .append("div")
+        .attr("class", "tooltip")
+        .style("position", "absolute")
+        .style("background-color", "white")
+        .style("padding", "6px")
+        .style("border-radius", "4px")
+        .style("opacity", 0);
 
     svg.append("text")
         .attr("class", "incomeP")
