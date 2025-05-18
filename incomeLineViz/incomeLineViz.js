@@ -123,7 +123,7 @@ function renderIncomeLineViz() {
         .attr("class", "tooltip")
         .style("position", "absolute")
         .style("background-color", "white")
-        .style("padding", "6px")
+        .style("padding", "10px")
         .style("border-radius", "4px")
         .style("opacity", 0);
 
