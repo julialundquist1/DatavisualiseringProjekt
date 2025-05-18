@@ -91,10 +91,8 @@ function renderActivityViz () {
         .selectAll("text")
         .attr("class", "activityText")
         .attr("fill", "white");
-    
-    svg.selectAll(".domain, .tick line")
-        .attr("stroke", "white");
 
+    svg.selectAll(".domain").remove();
     svg.selectAll(".tick line").remove();
 
     svg.append("text")
