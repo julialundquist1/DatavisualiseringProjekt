@@ -36,10 +36,8 @@ function renderIncomeBarViz () {
     
     
     let sortedIncomeData = incomeData.sort((a,b) => b.djIncome - a.djIncome);
-    console.log(sortedIncomeData);
     
     let managerNames = sortedIncomeData.map(x => x.name);
-    console.log(sortedIncomeData);
     
     let colorArray = ["#FE00B0", "#BB00FF", "#FF2D1F", "#055C00", "#0333ED", "#00FFFF", "#FFFB00", "#480892", "#2FFF00", "#FF7317"];
 

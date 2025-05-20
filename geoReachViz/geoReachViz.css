@@ -1,0 +1,14 @@
+.cityText {
+    font-size: 12px;
+    font-family: sans-serif;
+}
+
+.cityP {
+    font-family: sans-serif;
+    font-size: 16px;
+    color: white;
+}
+
+#dropDownCity {
+    width: 100px;
+}

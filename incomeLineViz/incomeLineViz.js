@@ -101,6 +101,7 @@ function renderIncomeLineViz() {
             .enter()
             .append("circle")
             .attr("id", d => `circle_${data.id}`)
+            .attr("class", "incomeCircles")
             .attr("fill", colorArray[index])
             .attr("cx", d => yearScale(d.year))
             .attr("cy", d => incomeScale(d.income))
@@ -175,6 +176,15 @@ function renderIncomeLineViz() {
                     d3.selectAll(`#circle_${id}`).attr("visibility", "visible");
                 });
             }
+        });
+
+    d3.select("body").append("button")
+        .attr("id", "resetButton")
+        .text("Reset all")
+        .on("click", (event) => {
+            activeLines = [];
+            d3.selectAll(".incomeLine").attr("visibility", "visible");
+            d3.selectAll(".incomeCircles").attr("visibility", "visible");
         });
 }
 

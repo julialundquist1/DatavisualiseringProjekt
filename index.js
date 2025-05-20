@@ -1,1 +1,1 @@
-renderActivityViz();
+renderGeoReachViz();
