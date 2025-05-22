@@ -118,12 +118,6 @@ h3:nth-of-type(2), h3:nth-of-type(3) {
     height: 700px;
     background-color: white;
 }
-
-#footer {
-    height: 150px;
-    background-color: #480892;
-}
-
 #belowText  {
     margin-top: 50px;
 }
@@ -186,4 +180,46 @@ h3:nth-of-type(2), h3:nth-of-type(3) {
     width: 100px;
     height: 700px;
     margin-top: 50px;
+}
+
+#annualGigText {
+    margin-top: 150px;
+}
+
+#cityReachText {
+    margin-top: 100px;
+}
+
+#footerPic {
+    height: 40px;
+    width: 40px;
+}
+
+#footerText {
+    color: #A0ED15;
+    font-family: IbmPlexMono;
+    font-size: 12px;
+    width: 750px;
+    text-align: center;
+}
+
+#footer {
+    height: 150px;
+    background-color: #480892;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#footerBox {
+    display: flex;
+    gap: 10px;
+}
+
+#igText {
+    color: white;
+    font-weight: bold;
+    font-family: IbmPlexMono;
+    font-size: 14px;
 }

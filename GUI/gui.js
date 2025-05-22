@@ -18,7 +18,7 @@ function renderGUI () {
                 <p class="description" id="belowText">This line chart displays the average yearly income of DJs represented by various managers between 2015 and 2024. Each line corresponds to a different manager, showing income trends over time. Use the filter functionality to highlight one or more managers and compare how their DJs’ average incomes has evolved throughout the years.</p>
                 <div id="secondViz"></div>
                 <div id="buttonContainer"></div>
-                <h3 class="category">Annual Gig Distribution</h3>
+                <h3 class="category" id="annualGigText">Annual Gig Distribution</h3>
                 <p class="description">Explore how active each manager has been in securing gigs for their DJs over the years. This heatmap uses color to reflect intensity: dark green signals high activity, light green indicates low activity, while lighter shades show moderate levels. Hover over a cell to see the average number of gigs per DJ for that year.</p>
                  <div id="legendBox">
                     <div id="legendOne">
@@ -39,7 +39,7 @@ function renderGUI () {
                     </div>
                 </div>
                 <div id="thirdViz"></div>
-                <h3 class="category">City Reach & Frequency</h3>
+                <h3 class="category" id="cityReachText">City Reach & Frequency</h3>
                 <p class="description">This bar chart visualizes how active each manager has been in different cities.
                     By selecting a city from the dropdown menu, you can compare how many gigs each manager has successfully arranged there. The chart offers a quick way to identify which managers have the strongest presence in specific locations.</p>
                 <div id="fourthContainer">
@@ -47,7 +47,13 @@ function renderGUI () {
                     <div id="dropDownContainer"></div>
                 </div>
             </div>
-            <div id="footer"></div>
+            <div id="footer">
+                <p id="footerText">We hope the visualizations have provided valuable insights into each manager’s performance. Whether you're analyzing trends or identifying standout managers, we’re glad to have supported your exploration.</p>
+                <div id="footerBox">
+                    <img id="footerPic" src="./media/images/raveimage.png">
+                    <p id="igText">@RaveLinq</p>
+                </div>
+            </div>
         </div>
     </div>
     `;

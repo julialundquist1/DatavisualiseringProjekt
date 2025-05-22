@@ -133,14 +133,9 @@ function renderActivityViz () {
           })
         ;
 
-    let tooltip = d3.select("body")
+    let tooltip = d3.select("#thirdViz")
         .append("div")
-        .attr("class", "tooltip")
-        .style("position", "absolute")
-        .style("background-color", "white")
-        .style("padding", "10px")
-        .style("border-radius", "4px")
-        .style("opacity", 0);
+        .attr("class", "tooltip");
     
 }
 

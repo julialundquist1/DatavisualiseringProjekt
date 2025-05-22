@@ -10,6 +10,13 @@
 }
 
 .tooltip {
+    border: 2px solid rgb(99, 10, 139);
+    background-color: black;
     font-family: Inter;
-    border: 1px solid grey;
+    font-size: 12px;
+    color: white;
+    position: absolute;
+    padding: 10px;
+    border-radius: 4px;
+    opacity: 0;
 }
