@@ -4,7 +4,7 @@ function renderIncomeBarViz () {
     const wViz = wSvg * 0.8;
     const hViz = hSvg * 0.7;
     const wPadding = (wSvg - wViz) / 2;
-    const hPaddingTop = 50;
+    const hPadding = 50;
 
     let incomeData = [];
 
@@ -17,8 +17,14 @@ function renderIncomeBarViz () {
         let managerGigs = Gigs.filter(gig => djArray.some(dj => dj.id === gig.djID));
 
         let gigDates = managerGigs.map(gig => new Date(gig.date));
-        let earliest = new Date(Math.min(...gigDates));
-        let latest = new Date(Math.max(...gigDates));
+
+        let earliest = gigDates[0];
+        let latest = gigDates[0];
+
+        for (let date of gigDates) {
+            if (date < earliest) earliest = date;
+            if (date > latest) latest = date;
+        }
 
         let yearsActive = latest.getFullYear() - earliest.getFullYear() + 1;
         let djIncome = 0;
@@ -36,19 +42,16 @@ function renderIncomeBarViz () {
     
     
     let sortedIncomeData = incomeData.sort((a,b) => b.djIncome - a.djIncome);
-    
     let managerNames = sortedIncomeData.map(x => x.name);
     
     let colorArray = ["#FE00B0", "#BB00FF", "#FF2D1F", "#055C00", "#0333ED", "#00FFFF", "#FFFB00", "#480892", "#2FFF00", "#FF7317"];
 
     let maxIncome = incomeData[0].djIncome;
-    let minIncome = incomeData[0].djIncome;
     for (let income of incomeData) {
         maxIncome = Math.max(maxIncome, income.djIncome);
-        minIncome = Math.min(minIncome, income.djIncome);
     }
 
-    let incomeScale = d3.scaleLinear([0, maxIncome], [hPaddingTop + hViz, hPaddingTop]);
+    let incomeScale = d3.scaleLinear([0, maxIncome], [hPadding + hViz, hPadding]);
     let heightScale = d3.scaleLinear([0, maxIncome], [0, hViz]);
     let managerScale = d3.scaleBand(managerNames, [wPadding, wPadding + wViz]).paddingInner(0.4).paddingOuter(0.4);
     
@@ -72,7 +75,7 @@ function renderIncomeBarViz () {
 
     let xAxis = d3.axisBottom(managerScale);
     svg.append("g")
-        .attr("transform", `translate(0, ${hViz + hPaddingTop})`)
+        .attr("transform", `translate(0, ${hViz + hPadding})`)
         .call(xAxis)
         .selectAll("text")
         .attr("class", "incomeVizText")
@@ -97,14 +100,14 @@ function renderIncomeBarViz () {
     svg.append("text")
         .attr("class", "incomeP")
         .attr("x", wPadding - 30)             
-        .attr("y", hPaddingTop - 20)             
+        .attr("y", hPadding - 20)             
         .attr("fill", "white")
         .text("Income");
 
     svg.append("text")
         .attr("class", "incomeP")
         .attr("x", wPadding + wViz / 2)
-        .attr("y", hPaddingTop + hViz + 120)     
+        .attr("y", hPadding + hViz + 120)     
         .attr("text-anchor", "middle")        
         .attr("fill", "white")
         .text("Managers");    

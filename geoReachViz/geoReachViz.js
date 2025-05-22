@@ -135,7 +135,7 @@ function renderGeoReachViz() {
     const wViz = wSvg * 0.8;
     const hViz = hSvg * 0.7;
     const wPadding = (wSvg - wViz) / 2;
-    const hPaddingTop = 50;
+    const hPadding = 50;
 
     for (let manager of Managers) {
         let name = manager.name;
@@ -174,22 +174,11 @@ function renderGeoReachViz() {
         }
     }
 
-    let maxAttendance = cityData[0].cities[0].attendance;
-    let minAttendance = cityData[0].cities[0].attendance;
-    for (let object of cityData) {
-        for (let city of object.cities) {
-            maxAttendance = Math.max(maxAttendance, city.attendance);
-            minAttendance= Math.min(minAttendance, city.attendance);
-        }
-    }
-
     let managers = cityData.map(x => x.name);
 
-    gigScale = d3.scaleLinear([0, maxNumOfTimes], [hPaddingTop + hViz, hPaddingTop]);
+    gigScale = d3.scaleLinear([0, maxNumOfTimes], [hPadding + hViz, hPadding]);
     heightScale = d3.scaleLinear([0, maxNumOfTimes], [0, hViz]);
-    managerScale = d3.scaleBand(managers, [wPadding, wPadding + wViz])
-        .paddingInner(0.4).paddingOuter(0.4)
-    ;
+    managerScale = d3.scaleBand(managers, [wPadding, wPadding + wViz]).paddingInner(0.4).paddingOuter(0.4);
 
     svg = d3.select("#fourthViz")
         .append("svg")
@@ -199,7 +188,7 @@ function renderGeoReachViz() {
     
     let xAxis = d3.axisBottom(managerScale);
     svg.append("g")
-        .attr("transform", `translate(0, ${hViz + hPaddingTop})`)
+        .attr("transform", `translate(0, ${hViz + hPadding})`)
         .call(xAxis)
         .selectAll("text")
         .attr("class", "cityText")
@@ -226,14 +215,14 @@ function renderGeoReachViz() {
     svg.append("text")
         .attr("class", "cityP")
         .attr("x", wPadding - 30)             
-        .attr("y", hPaddingTop - 20)             
+        .attr("y", hPadding - 20)             
         .attr("fill", "white")
         .text("Number of gigs");
 
     svg.append("text")
         .attr("class", "cityP")
         .attr("x", wPadding + wViz / 2)
-        .attr("y", hPaddingTop + hViz + 120)     
+        .attr("y", hPadding + hViz + 120)     
         .attr("text-anchor", "middle")        
         .attr("fill", "white")
         .text("Managers");   

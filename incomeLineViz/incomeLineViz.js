@@ -4,7 +4,7 @@ function renderIncomeLineViz() {
     const wViz = wSvg * 0.8;
     const hViz = hSvg * 0.8;
     const wPadding = (wSvg - wViz) / 2;
-    const hPaddingTop = 50;
+    const hPadding = 50;
 
     let incomeData = [];
 
@@ -49,9 +49,8 @@ function renderIncomeLineViz() {
         }
     }
 
-    let incomeScale = d3.scaleLinear([0, maxIncome], [hPaddingTop + hViz, hPaddingTop]);
-    let yearScale = d3.scalePoint(allYears, [wPadding, wPadding + wViz])
-        .padding(0);
+    let incomeScale = d3.scaleLinear([0, maxIncome], [hPadding + hViz, hPadding]);
+    let yearScale = d3.scalePoint(allYears, [wPadding, wPadding + wViz]).padding(0);
 
     let svg = d3.select("#secondViz")
         .append("svg")
@@ -61,12 +60,11 @@ function renderIncomeLineViz() {
 
     let xAxis = d3.axisBottom(yearScale);
     svg.append("g")
-        .attr("transform", `translate(0, ${hViz + hPaddingTop})`)
+        .attr("transform", `translate(0, ${hViz + hPadding})`)
         .call(xAxis)
         .selectAll("text")
         .attr("class", "incomeVizText")
         .attr("fill", "white");
-    ;
 
     let yAxis = d3.axisLeft(incomeScale);
     svg.append("g")
@@ -126,14 +124,14 @@ function renderIncomeLineViz() {
     svg.append("text")
         .attr("class", "incomeP")
         .attr("x", wPadding - 30)
-        .attr("y", hPaddingTop - 20)
+        .attr("y", hPadding- 20)
         .attr("fill", "white")
         .text("Income");
 
     svg.append("text")
         .attr("class", "incomeP")
         .attr("x", wPadding + wViz / 2)
-        .attr("y", hPaddingTop + hViz + 60)
+        .attr("y", hPadding + hViz + 60)
         .attr("text-anchor", "middle")
         .attr("fill", "white")
         .text("Years");
@@ -175,8 +173,6 @@ function renderIncomeLineViz() {
                 });
             }
         });
-
-    
 
     d3.select("#buttonContainer").append("div")
         .attr("id", "resetContainer")

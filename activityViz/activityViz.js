@@ -4,7 +4,7 @@ function renderActivityViz () {
     const wViz = wSvg * 0.8;
     const hViz = hSvg * 0.7;
     const wPadding = (wSvg - wViz) / 2;
-    const hPaddingTop = 50;
+    const hPadding = 50;
 
     let actitivtyData = [];
 
@@ -39,15 +39,6 @@ function renderActivityViz () {
         actitivtyData.push(activityObject);
     }
 
-    let minGigs = actitivtyData[0].years[0].gigs;
-    let maxGigs = actitivtyData[0].years[0].gigs;
-    for (let activity of actitivtyData) {
-        for (let year of activity.years) {
-            minGigs = Math.min(minGigs, year.gigs);
-            maxGigs = Math.max(maxGigs, year.gigs);
-        }
-    }
-
     let gigData = [];
     for (let manager of actitivtyData) {
         for (let year of manager.years) {
@@ -62,7 +53,7 @@ function renderActivityViz () {
     let allYears = actitivtyData[0].years.map(y => y.year);
     let allNames = actitivtyData.map(x => x.name);
 
-    let yearScale = d3.scaleBand(allYears, [hPaddingTop + hViz, hPaddingTop]);
+    let yearScale = d3.scaleBand(allYears, [hPadding + hViz, hPadding]);
     let managerScale = d3.scaleBand(allNames, [wPadding, wPadding + wViz]);
 
     let svg = d3.select("#thirdViz")
@@ -73,7 +64,7 @@ function renderActivityViz () {
     
     let xAxis = d3.axisBottom(managerScale);
     svg.append("g")
-        .attr("transform", `translate(0, ${hViz + hPaddingTop})`)
+        .attr("transform", `translate(0, ${hViz + hPadding})`)
         .call(xAxis)
         .selectAll("text")
         .attr("class", "activityText")
@@ -98,19 +89,19 @@ function renderActivityViz () {
     svg.append("text")
         .attr("class", "activityP")
         .attr("x", wPadding - 30)
-        .attr("y", hPaddingTop - 20)
+        .attr("y", hPadding - 20)
         .attr("fill", "white")
         .text("Years");
 
     svg.append("text")
         .attr("class", "activityP")
         .attr("x", wPadding + wViz / 2)
-        .attr("y", hPaddingTop + hViz + 130)
+        .attr("y", hPadding + hViz + 130)
         .attr("text-anchor", "middle")
         .attr("fill", "white")
         .text("Managers");
     
-    let groupViz = svg.append("g")
+    svg.append("g")
         .selectAll("rect")
         .data(gigData)
         .enter()
@@ -136,7 +127,6 @@ function renderActivityViz () {
     let tooltip = d3.select("#thirdViz")
         .append("div")
         .attr("class", "tooltip");
-    
 }
 
 function decideColors(gigs) {
