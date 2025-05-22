@@ -130,7 +130,7 @@ let managerScale;
 let colorArray = ["#FE00B0", "#BB00FF", "#FF2D1F", "#055C00", "#0333ED", "#00FFFF", "#FFFB00", "#480892", "#2FFF00", "#FF7317"];
 
 function renderGeoReachViz() {
-    const wSvg = 900;
+    const wSvg = 950;
     const hSvg = 700;
     const wViz = wSvg * 0.8;
     const hViz = hSvg * 0.7;
