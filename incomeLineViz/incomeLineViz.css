@@ -1,0 +1,44 @@
+#buttonContainer {
+    height: 70px;
+    width: 1000px;
+    background-color: black;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 10px;
+}
+
+#managerButtons {
+    display: flex;
+    gap: 5px;
+}
+
+#managerButtons button {
+    width: 100px;
+    height: 40px;
+    background-color: black;
+    color: white;
+    border-radius: 7px;
+    font-size: 10px;
+    font-family: Inter;
+    padding: 5px;
+    cursor: pointer;
+}
+
+#resetContainer {
+    display: flex;
+    justify-content: center;
+}
+
+#resetButton {
+    width: 130px;
+    height: 40px;
+    background-color: black;
+    cursor: pointer;
+    padding: 5px;
+    font-size: 10px;
+    font-family: Inter;
+    color: white;
+    border-radius: 7px;
+    border: 2px solid white;
+}

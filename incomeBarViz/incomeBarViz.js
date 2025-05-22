@@ -52,7 +52,7 @@ function renderIncomeBarViz () {
     let heightScale = d3.scaleLinear([0, maxIncome], [0, hViz]);
     let managerScale = d3.scaleBand(managerNames, [wPadding, wPadding + wViz]).paddingInner(0.4).paddingOuter(0.4);
     
-    let svg = d3.select("body")
+    let svg = d3.select("#firstViz")
         .append("svg")
         .attr("width", wSvg)
         .attr("height", hSvg)

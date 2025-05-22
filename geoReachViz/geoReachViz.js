@@ -191,7 +191,7 @@ function renderGeoReachViz() {
         .paddingInner(0.4).paddingOuter(0.4)
     ;
 
-    svg = d3.select("body")
+    svg = d3.select("#fourthViz")
         .append("svg")
         .attr("width", wSvg)
         .attr("height", hSvg)
@@ -220,7 +220,7 @@ function renderGeoReachViz() {
     svg.selectAll(".domain, .tick line")
         .attr("stroke", "white");
 
-    let select = d3.select("body").append("select")
+    let select = d3.select("#dropDownContainer").append("select")
         .attr("id", "dropDownCity");
     
     svg.append("text")

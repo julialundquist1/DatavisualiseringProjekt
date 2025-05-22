@@ -65,7 +65,7 @@ function renderActivityViz () {
     let yearScale = d3.scaleBand(allYears, [hPaddingTop + hViz, hPaddingTop]);
     let managerScale = d3.scaleBand(allNames, [wPadding, wPadding + wViz]);
 
-    let svg = d3.select("body")
+    let svg = d3.select("#thirdViz")
         .append("svg")
         .attr("width", wSvg)
         .attr("height", hSvg)

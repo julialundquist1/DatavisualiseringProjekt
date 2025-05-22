@@ -1,22 +1,22 @@
 .cityText {
     font-size: 12px;
-    font-family: sans-serif;
+    font-family: Inter;
 }
 
 .cityP {
-    font-family: sans-serif;
+    font-family: Inter;
     font-size: 16px;
     color: white;
 }
 
 #dropDownCity {
-    width: 100px;
+    width: 120px;
     height: 35px;
     background-color: black;
     color: white;
     border: 1px solid rgb(255, 255, 255);
     border-radius: 5px;
     font-size: 12px;
-    font-family: sans-serif;
+    font-family: Inter;
     padding: 5px;
 }

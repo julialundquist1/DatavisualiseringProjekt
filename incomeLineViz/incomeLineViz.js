@@ -1,6 +1,6 @@
 function renderIncomeLineViz() {
     const wSvg = 950;
-    const hSvg = 600;
+    const hSvg = 670;
     const wViz = wSvg * 0.8;
     const hViz = hSvg * 0.8;
     const wPadding = (wSvg - wViz) / 2;
@@ -53,7 +53,7 @@ function renderIncomeLineViz() {
     let yearScale = d3.scalePoint(allYears, [wPadding, wPadding + wViz])
         .padding(0);
 
-    let svg = d3.select("body")
+    let svg = d3.select("#secondViz")
         .append("svg")
         .attr("width", wSvg)
         .attr("height", hSvg)
@@ -145,12 +145,15 @@ function renderIncomeLineViz() {
 
 
     let activeLines = [];
-    d3.select("body").append("div")
-        .selectAll("div")
+    d3.select("#buttonContainer").append("div")
+        .attr("id", "managerButtons")
+        .selectAll("div") 
         .data(incomeData)
         .enter()
         .append("button")
         .text(d => d.name)
+        .style("border", "2px solid")
+        .style("border-color", (d, i, nodes) => colorArray[i])
         .on("click", (event, d) => {
             const lineId = `line_${d.id}`;
             const circleId = `circle_${d.id}`;
@@ -178,7 +181,11 @@ function renderIncomeLineViz() {
             }
         });
 
-    d3.select("body").append("button")
+    
+
+    d3.select("#buttonContainer").append("div")
+        .attr("id", "resetContainer")
+        .append("button")
         .attr("id", "resetButton")
         .text("Reset all")
         .on("click", (event) => {
