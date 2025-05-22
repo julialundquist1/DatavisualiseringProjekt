@@ -17,7 +17,7 @@ function renderIncomeBarViz () {
         let managerGigs = Gigs.filter(gig => djArray.some(dj => dj.id === gig.djID));
 
         let gigDates = managerGigs.map(gig => new Date(gig.date));
-
+        
         let earliest = gigDates[0];
         let latest = gigDates[0];
 
@@ -29,14 +29,14 @@ function renderIncomeBarViz () {
         let yearsActive = latest.getFullYear() - earliest.getFullYear() + 1;
         let djIncome = 0;
         for (let dj of djArray) {
-            for (let gig of Gigs) {
+            for (let gig of managerGigs) {
                 if (gig.djID === dj.id) {
                     djIncome += gig.djEarnings;
                 }
             }
         }
         let averageIncome = djIncome / (numberOfDjs * yearsActive);
-        let chart = {name: name, id: id, djIncome: averageIncome, numOfDjs: numberOfDjs};
+        let chart = {name: name, id: id, djIncome: averageIncome};
         incomeData.push(chart);
     }
     
@@ -61,7 +61,7 @@ function renderIncomeBarViz () {
         .attr("height", hSvg)
         .style("background-color", "black");
 
-    let groupViz = svg.append("g")
+    svg.append("g")
         .selectAll("rect")
         .data(sortedIncomeData)
         .enter()
