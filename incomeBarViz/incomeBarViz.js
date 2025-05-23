@@ -88,11 +88,11 @@ function renderIncomeBarViz () {
         .append("text")
         .attr("class", "label")
         .attr("x", d => managerScale(d.name) + managerScale.bandwidth() / 2)
-        .attr("y", d => incomeScale(d.djIncome) - 20)  // lite ovanför stapeln
+        .attr("y", d => incomeScale(d.djIncome) - 20)
         .attr("text-anchor", "middle")
         .attr("fill", "white")
-        .text(d => d.lastYearsIncome.toFixed(0)); // rundar till heltal
-
+        .text(d => d.lastYearsIncome.toFixed(0));
+        
     svg.append("g")
         .selectAll(".label-line")
         .data(sortedIncomeData)
