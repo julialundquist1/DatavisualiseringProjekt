@@ -1,8 +1,8 @@
 function renderIncomeLineViz() {
-    const wSvg = 950;
-    const hSvg = 670;
+    const wSvg = 850;
+    const hSvg = 600;
     const wViz = wSvg * 0.8;
-    const hViz = hSvg * 0.8;
+    const hViz = hSvg * 0.75;
     const wPadding = (wSvg - wViz) / 2;
     const hPadding = 50;
 

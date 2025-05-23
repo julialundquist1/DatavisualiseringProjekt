@@ -1,8 +1,8 @@
 function renderActivityViz () {
-    const wSvg = 950;
-    const hSvg = 700;
+    const wSvg = 850;
+    const hSvg = 600;
     const wViz = wSvg * 0.8;
-    const hViz = hSvg * 0.7;
+    const hViz = hSvg * 0.65;
     const wPadding = (wSvg - wViz) / 2;
     const hPadding = 50;
 

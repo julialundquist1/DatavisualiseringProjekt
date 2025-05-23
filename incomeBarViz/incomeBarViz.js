@@ -1,6 +1,6 @@
 function renderIncomeBarViz () {
-    const wSvg = 950;
-    const hSvg = 670;
+    const wSvg = 850;
+    const hSvg = 600;
     const wViz = wSvg * 0.8;
     const hViz = hSvg * 0.7;
     const wPadding = (wSvg - wViz) / 2;
@@ -15,6 +15,15 @@ function renderIncomeBarViz () {
         let numberOfDjs = djArray.length;
 
         let managerGigs = Gigs.filter(gig => djArray.some(dj => dj.id === gig.djID));
+        let gigsLastYears = managerGigs.filter(gig => {
+            let year = new Date(gig.date).getFullYear();
+            return year >= 2022 && year <= 2024;
+        });
+
+        let incomeLastYears = 0;
+        for (let gig of gigsLastYears) {
+            incomeLastYears += gig.djEarnings;
+        }
 
         let gigDates = managerGigs.map(gig => new Date(gig.date));
         
@@ -36,10 +45,10 @@ function renderIncomeBarViz () {
             }
         }
         let averageIncome = djIncome / (numberOfDjs * yearsActive);
-        let chart = {name: name, id: id, djIncome: averageIncome};
+        let avgIncomeLastYears = incomeLastYears / numberOfDjs;
+        let chart = {name: name, id: id, djIncome: averageIncome, lastYearsIncome: avgIncomeLastYears};
         incomeData.push(chart);
     }
-    
     
     let sortedIncomeData = incomeData.sort((a,b) => b.djIncome - a.djIncome);
     let managerNames = sortedIncomeData.map(x => x.name);
@@ -71,7 +80,31 @@ function renderIncomeBarViz () {
         .attr("x", (d, i, nodes) => managerScale(d.name))
         .attr("y", (d, i, nodes) => incomeScale(d.djIncome))
         .attr("fill", (d, i, nodes) => colorArray[i]);
-    
+
+    svg.append("g")
+        .selectAll(".label")
+        .data(sortedIncomeData)
+        .enter()
+        .append("text")
+        .attr("class", "label")
+        .attr("x", d => managerScale(d.name) + managerScale.bandwidth() / 2)
+        .attr("y", d => incomeScale(d.djIncome) - 20)  // lite ovanför stapeln
+        .attr("text-anchor", "middle")
+        .attr("fill", "white")
+        .text(d => d.lastYearsIncome.toFixed(0)); // rundar till heltal
+
+    svg.append("g")
+        .selectAll(".label-line")
+        .data(sortedIncomeData)
+        .enter()
+        .append("line")
+        .attr("class", "label-line")
+        .attr("x1", d => managerScale(d.name) + managerScale.bandwidth() / 2)
+        .attr("x2", d => managerScale(d.name) + managerScale.bandwidth() / 2)
+        .attr("y1", d => incomeScale(d.djIncome))
+        .attr("y2", d => incomeScale(d.djIncome) - 15)
+        .attr("stroke", "white")
+        .attr("stroke-width", 1);
 
     let xAxis = d3.axisBottom(managerScale);
     svg.append("g")
@@ -100,7 +133,7 @@ function renderIncomeBarViz () {
     svg.append("text")
         .attr("class", "incomeP")
         .attr("x", wPadding - 30)             
-        .attr("y", hPadding - 20)             
+        .attr("y", hPadding - 40)             
         .attr("fill", "white")
         .text("Income");
 
@@ -110,7 +143,7 @@ function renderIncomeBarViz () {
         .attr("y", hPadding + hViz + 120)     
         .attr("text-anchor", "middle")        
         .attr("fill", "white")
-        .text("Managers");    
+        .text("Managers");
 }
 
 

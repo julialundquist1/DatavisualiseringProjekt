@@ -106,17 +106,21 @@ h3:nth-of-type(2), h3:nth-of-type(3) {
     font-family: IbmPlexMono;
 }
 
-#firstViz, #secondViz, #fourthViz {
+#fourthViz {
     width: 950px;
     height: 670px;
-    background-color: white;
     margin-top: 50px;
 }
 
+#firstViz, #secondViz {
+    width: 850px;
+    height: 600px;
+    margin-top: 70px;
+}
+
 #thirdViz {
-    width: 950px;
-    height: 700px;
-    background-color: white;
+    width: 850px;
+    height: 600px;
 }
 #belowText  {
     margin-top: 50px;
@@ -126,7 +130,7 @@ h3:nth-of-type(2), h3:nth-of-type(3) {
     display: flex;
     background-color: black;
     height: 80px;
-    width: 950px;
+    width: 770px;
     margin-top: 50px;
     gap: 20px;
     justify-content: end;
