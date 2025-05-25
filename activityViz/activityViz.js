@@ -24,8 +24,7 @@ function renderActivityViz () {
         for (let i = 2015; i <= 2024; i++) {
             let numOfGigs = 0;
             for (let gig of managerGigs) {
-                let date = new Date(gig.date);
-                let year = date.getFullYear();
+                let year = new Date(gig.date).getFullYear();
                 if (year == i) {
                     numOfGigs ++;
                 }

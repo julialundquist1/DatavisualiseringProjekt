@@ -14,7 +14,8 @@ function renderIncomeBarViz () {
         let djArray = DJs.filter(x => id == x.managerID);
         let numberOfDjs = djArray.length;
 
-        let managerGigs = Gigs.filter(gig => djArray.some(dj => dj.id === gig.djID));
+        let managerGigs = Gigs.filter(gig => djArray.map(dj => dj.id).includes(gig.djID));
+
         let gigsLastYears = managerGigs.filter(gig => {
             let year = new Date(gig.date).getFullYear();
             return year >= 2022 && year <= 2024;

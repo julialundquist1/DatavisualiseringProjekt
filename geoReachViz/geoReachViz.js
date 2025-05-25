@@ -36,7 +36,6 @@ function renderGeoReachViz() {
             let cityObject = { city: city.name, cityID: city.id, numberOfTimes: numOfTimes };
             managerObject.cities.push(cityObject);
         }
-
         cityData.push(managerObject);
     }
 
@@ -110,7 +109,7 @@ function renderGeoReachViz() {
     updateBarChart(Cities[0].id);
     
     d3.select("#dropDownCity").on("change", function() {
-        const selectedCityID = +this.value;
+        const selectedCityID = this.value;
         updateBarChart(selectedCityID);
         });
 }

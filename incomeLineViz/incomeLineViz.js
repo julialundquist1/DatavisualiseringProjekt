@@ -24,8 +24,7 @@ function renderIncomeLineViz() {
         for (let i = 2015; i <= 2024; i++) {
             let djIncome = 0;
             for (let gig of managerGigs) {
-                let date = new Date(gig.date);
-                let year = date.getFullYear();
+                let year = new Date(gig.date).getFullYear();
                 if (year == i) {
                     djIncome += gig.djEarnings;
                 }
@@ -94,7 +93,7 @@ function renderIncomeLineViz() {
 
     incomeData.forEach((data, index) => {
         svg.append("g")
-            .selectAll("rect")
+            .selectAll("circle")
             .data(data.years)
             .enter()
             .append("circle")
@@ -140,7 +139,7 @@ function renderIncomeLineViz() {
     let activeLines = [];
     d3.select("#buttonContainer").append("div")
         .attr("id", "managerButtons")
-        .selectAll("div") 
+        .selectAll("button") 
         .data(incomeData)
         .enter()
         .append("button")
@@ -148,9 +147,6 @@ function renderIncomeLineViz() {
         .style("border", "2px solid")
         .style("border-color", (d, i, nodes) => colorArray[i])
         .on("click", (event, d) => {
-            const lineId = `line_${d.id}`;
-            const circleId = `circle_${d.id}`;
-
             const isActive = activeLines.includes(d.id);
 
             if (isActive) {
@@ -163,10 +159,10 @@ function renderIncomeLineViz() {
 
             if (activeLines.length === 0) {
                 d3.selectAll(".incomeLine").attr("visibility", "visible");
-                d3.selectAll("circle").attr("visibility", "visible");
+                d3.selectAll(".incomeCircles").attr("visibility", "visible");
             } else {
                 d3.selectAll(".incomeLine").attr("visibility", "hidden");
-                d3.selectAll("circle").attr("visibility", "hidden");
+                d3.selectAll(".incomeCircles").attr("visibility", "hidden");
                 activeLines.forEach(id => {
                     d3.select(`#line_${id}`).attr("visibility", "visible");
                     d3.selectAll(`#circle_${id}`).attr("visibility", "visible");
