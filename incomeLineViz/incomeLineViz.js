@@ -84,7 +84,7 @@ function renderIncomeLineViz() {
         .selectAll("path")
         .data(incomeData)
         .enter()
-        .append("path")
+        .append("path") 
         .attr("id", d => `line_${d.id}`)
         .attr("class", "incomeLine")
         .attr("stroke", (d, i, nodes) => colorArray[i])
